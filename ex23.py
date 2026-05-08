@@ -22,6 +22,28 @@ def calcularMedia():
         i = i + 1
     media = totalNotas/len(listaAluno)
     return (media)
+
+def calcularClassificacao():
+    global maiorNota, menorNota, melhoresAlunos, pioresAlunos
+    i = 1
+    maiorNota = listaAluno[0]["notaAluno"]
+    menorNota = listaAluno[0]["notaAluno"]
+    melhoresAlunos = [listaAluno[0]["nomeAluno"]]
+    pioresAlunos = [listaAluno[0]["nomeAluno"]]
+    while i<len(listaAluno):
+        nota = listaAluno[i]["notaAluno"]
+        if nota>maiorNota:
+            maiorNota = nota
+            melhoresAlunos.clear()
+            melhoresAlunos.append(listaAluno[i]["nomeAluno"])
+        elif nota==maiorNota:
+            melhoresAlunos.append(listaAluno[i]["nomeAluno"])
+        if nota<menorNota:
+            menorNota = nota
+            pioresAlunos.clear()
+            pioresAlunos.append(listaAluno[i]["nomeAluno"])
+        elif nota == menorNota:
+            pioresAlunos.append(listaAluno[i]["nomeAluno"])
 while True:
     while True:
         try:
@@ -64,3 +86,16 @@ print("A media da turma foi: ", calcularMedia())
 print("A quantidade de aprovados foi: ", qntdAprovada)
 print("A quantidade de reprovados foi: ", qntdReprovada)
 print("A quantidade de pessoas em recuperação foi: ", qntdRecuperacao)
+
+calcularClassificacao()
+print("A menor nota da turma foi: ", menorNota, " com esse(s) aluno(s) que tem essa nota: ")
+i = 0
+while i<len(pioresAlunos):
+    print(pioresAlunos[i])
+    i = i + 1
+print("E a maior nota foi: ", maiorNota, "com esse(s) aluno(s) que tem essa nota: ")
+i = 0
+while i<len(melhoresAlunos):
+    print(melhoresAlunos[i])
+    i = i + 1
+
